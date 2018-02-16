@@ -2,6 +2,8 @@
 
 Microsoft Word as a Java "IDE"
 
+![](./example.gif)
+
 ## Setup
 
 Set the path to Java's `\bin` (at the top in the macro).
