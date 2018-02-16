@@ -12,6 +12,6 @@ Set the path to Java's `\bin` (at the top in the macro).
 
 ## Use
 
-Of course, make sure your Word document has the same name as your Java class!
+Copy or modify the provided `.docx` file. Of course, make sure your Word document has the same name as your Java class!
 
-To build and run, simply click the "run icon" (triangle) in the quick access toolbar (top left, next to save/undo/redo).
+To build and run, simply click the "run icon" (triangle) in the quick access toolbar.
