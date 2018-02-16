@@ -1,3 +1,7 @@
+*.java
+*.class
+*.jar
+
 *.tmp
 
 # Word temporary
