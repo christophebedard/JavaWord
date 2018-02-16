@@ -2,7 +2,9 @@
 
 Microsoft Word as a Java "IDE"
 
-![](./example.gif)
+<p align="center">
+    <img src="example.gif">
+</p>
 
 ## Setup
 
