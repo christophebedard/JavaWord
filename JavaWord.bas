@@ -1,3 +1,28 @@
+Function IsBinaryAccessible(binaryName As String) As Boolean
+    Dim wShell As Object
+    Dim exitCode As Long
+    
+    Set wShell = CreateObject("WScript.Shell")
+    
+    ' 1. Run "cmd /c where [binary]"
+    ' "cmd /c" ensures we capture the exit code correctly.
+    ' The last parameter "True" makes VBA wait for the command to finish.
+    exitCode = wShell.Run("cmd /c where " & binaryName, 0, True)
+    
+    ' 2. Interpret the result
+    ' 0 = Found
+    ' 1 = Not Found
+    If exitCode = 0 Then
+        IsBinaryAccessible = True
+    Else
+        IsBinaryAccessible = False
+    End If
+    
+    Set wShell = Nothing
+End Function
+
+
+
 Sub JavaWord()
 ' JavaWord macro
 ' runs a Word file as Java code
@@ -14,9 +39,16 @@ Dim textContent As String
 Dim filePath As String
 Dim fso As Object
 Dim fileStream As Object
-    
+
 ' Set path to java bin
-strJavaPath = "C:\Program Files\Common Files\Oracle\Java\javapath"
+strJavaPath = ""
+
+If strJavaPath = "" Then
+    If Not IsBinaryAccessible("java") Then
+        MsgBox "Java could not be found. Add it to the path or edit the macro and set the instalation path.", vbCritical
+        End
+    End If
+End If
 
 ' Retrieve name of ActiveDocument
 strDocPath = ActiveDocument.Path
@@ -31,6 +63,7 @@ Application.ScreenUpdating = False
 If ActiveDocument.Path = "" Then
     ' If not previously saved
     MsgBox "The current document must be saved at least once."
+    End
 Else
     ' If previously saved, create a copy
     ' Set myCopy = Documents.Add(ActiveDocument.FullName)
