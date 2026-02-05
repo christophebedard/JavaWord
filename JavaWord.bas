@@ -45,7 +45,7 @@ End If
 '   3- Compile .java file
 '   4- Run .java file
 strCmd = "cmd.exe /S /K"
-strCmd = strCmd & "CD " & strDocPath
+strCmd = strCmd & "CD /D " & strDocPath
 strCmd = strCmd & " & set PATH=" & strJavaPath & ";%PATH%"
 strCmd = strCmd & " & javac " & strDocNameExt
 strCmd = strCmd & " & java " & strDocName
