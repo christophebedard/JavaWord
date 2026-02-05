@@ -23,16 +23,16 @@ End Function
 
 
 
-Sub JavaWord()
-' JavaWord macro
-' runs a Word file as Java code
+Sub PythonWord()
+' PythonWord macro
+' runs a Word file as Python Script
 '
 ' @author christophebedard
 
 Dim strDocName As String
 Dim strDocNameExt As String
 Dim intPos As Integer
-Dim strJavaPath As String
+Dim strPythonPath As String
 Dim strCmd As String
 
 Dim textContent As String
@@ -40,12 +40,12 @@ Dim filePath As String
 Dim fso As Object
 Dim fileStream As Object
 
-' Set path to java bin
-strJavaPath = ""
+' Set path to python bin
+strPythonPath = ""
 
-If strJavaPath = "" Then
-    If Not IsBinaryAccessible("java") Then
-        MsgBox "Java could not be found. Add it to the path or edit the macro and set the instalation path.", vbCritical
+If strPythonPath = "" Then
+    If Not IsBinaryAccessible("python") Then
+        MsgBox "Python could not be found. Add it to the path or edit the macro and set the instalation path.", vbCritical
         End
     End If
 End If
@@ -55,7 +55,7 @@ strDocPath = ActiveDocument.Path
 strDocName = ActiveDocument.Name
 intPos = InStrRev(strDocName, ".")
 strDocName = Left(strDocName, intPos - 1)
-strDocNameExt = strDocName & ".java"
+strDocNameExt = strDocName & ".py"
 
 Application.ScreenUpdating = False
 
@@ -104,15 +104,15 @@ Application.ScreenUpdating = True
 
 ' Call command to
 '   1- cd to current directory
-'   2- Add java to PATH
-'   3- Compile .java file
-'   4- Run .java file
+'   2- Add python to PATH
+'   3- Run .py file
+'   4- Pause and exit cmd window
 strCmd = "cmd.exe /S /K "
 strCmd = strCmd & " CD /D " & strDocPath
-strCmd = strCmd & " & set PATH=" & strJavaPath & ";%PATH%"
-strCmd = strCmd & " & javac " & strDocNameExt
-strCmd = strCmd & " & java " & strDocName
+strCmd = strCmd & " & set PATH=" & strPythonPath & ";%PATH%"
+strCmd = strCmd & " & python " & strDocNameExt
 strCmd = strCmd & " & pause & exit"
 Call Shell(strCmd, vbNormalFocus)
 
 End Sub
+
